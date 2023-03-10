@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>MicMac Counter</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="micmacico.png">
+  <link rel="stylesheet" type="text/css" href="micmac.css">
+  <script type="text/javascript">
+function refresh_count() {
+  var req = new XMLHttpRequest();
+  req.onreadystatechange = function () {
+    if (req.readyState == 4 && req.status == 200) {
+      document.getElementById("cowcount").innerText = req.responseText;
+    }
+  }
+  req.open("GET", "cowcount", true);
+  req.send(null);
+  }
+function refresh_list() {
+  var req = new XMLHttpRequest();
+  req.onreadystatechange = function () {
+    if (req.readyState == 4 && req.status == 200) {
+      document.getElementById("cowlist").innerText = req.responseText;
+    }
+  }
+  req.open("GET", "cowlist", true);
+  req.send(null);
+}
+function init()
+{
+  refresh_count()
+  var int = self.setInterval(function () {refresh_count()}, 500);
+  var int2 = self.setInterval(function () {refresh_list()}, 500);
+}
+</script>
+
+
+</head>
+  <body onload="init()">
+    <img src="micmac.png" alt="micmac icon"> 
+    <div class="title">MicMac Counter</div>
+    <div class="counter"><span id="cowcount">0</span></div>
+    <div class="option">Show Node
+      <form>
+          <label  class="switch"><input type="checkbox"><span class="slider"></span>
+          <div class="node"><span id="cowlist"></span></div>
+          </label>
+      </form>
+    </div>
+  </body>
+</html>
